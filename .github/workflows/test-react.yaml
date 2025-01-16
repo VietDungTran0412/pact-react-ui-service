@@ -29,9 +29,6 @@ jobs:
       - name: Run tests
         run: npm test
 
-  build-and-push:
-    runs-on: ubuntu-latest
-    steps:
       - name: Print the commit's SHA of Git commit
         run: echo ${{ github.sha }}
 

@@ -18,7 +18,8 @@ COPY --from=build build pact-ui
 # Copy the nginx configuration
 COPY nginx.conf /etc/nginx/nginx.conf
 # Add maintainer
-MAINTAINER vietdung13x3
+LABEL author="vietdung13x3"
+# Expose the port
 EXPOSE 80
 ENTRYPOINT ["nginx", "-g", "daemon off;"]
 
