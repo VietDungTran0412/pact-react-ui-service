@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
-
+      # Xin chao
       - name: Install dependencies
         run: npm install
 
