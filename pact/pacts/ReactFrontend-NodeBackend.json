@@ -1,0 +1,59 @@
+{
+  "consumer": {
+    "name": "ReactFrontend"
+  },
+  "interactions": [
+    {
+      "description": "a request to create a new user",
+      "providerState": "provider allows user creation",
+      "request": {
+        "body": {
+          "address": "Hanoi, Vietnam",
+          "age": 22,
+          "email": "dinhtrungkien@example.com",
+          "firstname": "Dinh",
+          "lastname": "Trung Kien"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "method": "POST",
+        "path": "/users"
+      },
+      "response": {
+        "body": {
+          "address": "Hanoi, Vietnam",
+          "age": 22,
+          "email": "dinhtrungkien@example.com",
+          "firstname": "Dinh",
+          "id": 1,
+          "lastname": "Trung Kien"
+        },
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "matchingRules": {
+          "$.body.id": {
+            "match": "type"
+          }
+        },
+        "status": 201
+      }
+    }
+  ],
+  "metadata": {
+    "pact-js": {
+      "version": "13.2.0"
+    },
+    "pactRust": {
+      "ffi": "0.4.22",
+      "models": "1.2.3"
+    },
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  },
+  "provider": {
+    "name": "NodeBackend"
+  }
+}
