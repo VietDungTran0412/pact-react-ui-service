@@ -33,7 +33,7 @@ describe('React frontend -> /users contract test', () => {
           path: '/users',
           headers: { 'Content-Type': 'application/json' },
           body: {
-            firstname: 'Dinh',
+            firstname: 'Tran',
             lastname: 'Trung Kien',
             email: 'dinhtrungkien@example.com',
             age: 22,
@@ -45,7 +45,7 @@ describe('React frontend -> /users contract test', () => {
           headers: { 'Content-Type': 'application/json' },
           body: {
             id: like(1),
-            firstname: 'Dinh',
+            firstname: 'Tran',
             lastname: 'Trung Kien',
             email: 'dinhtrungkien@example.com',
             age: 22,
@@ -57,7 +57,7 @@ describe('React frontend -> /users contract test', () => {
 
     it('should create a new user successfully', async () => {
       const response = await axios.post('http://127.0.0.1:1234/users', {
-        firstname: 'Dinh',
+        firstname: 'Tran',
         lastname: 'Trung Kien',
         email: 'dinhtrungkien@example.com',
         age: 22,
@@ -70,7 +70,7 @@ describe('React frontend -> /users contract test', () => {
       expect(response.headers['content-type']).toContain('application/json');
       expect(response.data).toEqual({
         id: expect.any(Number),
-        firstname: 'Dinh',
+        firstname: 'Tran',
         lastname: 'Trung Kien',
         email: 'dinhtrungkien@example.com',
         age: 22,
