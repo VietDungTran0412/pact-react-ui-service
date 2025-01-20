@@ -3,12 +3,16 @@ run-name: ${{ github.actor }} is executing the workflow
 env:
   NODE_VERSION: 22
   REPO_NAME: pact-react-ui-service
+  PACT_BROKER_BASE_URL: https://vietnam-national-university.pactflow.io
+  PACT_BROKER_TOKEN: FhetDP4tQXfYaQPLl6QrBw
+  PACTICIPANT: NodeBackend
+
 on:
   push:
     branches:
       - master
 jobs:
-  releasing-image:
+  test:
     runs-on: ubuntu-latest
     # Execute steps to test the project
     steps:
@@ -26,6 +30,9 @@ jobs:
       - name: Run tests
         run: npm test
 
+      - name: Consumer contract test
+        run: npx jest test/metrics-consumer.pact.test.js
+
       - name: Print the commit's SHA of Git commit
         run: echo ${{ github.sha }}
 
@@ -38,6 +45,10 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      - name: Publish contract
+        run: npx pact-broker publish pact\pacts --consumer-app-version "3.0.6" \
+          --branch "main" --broker-base-url ${{env.PACT_BROKER_BASE_URL}} --broker-token ${{env.PACT_BROKER_BASE_URL}}
+
       - name: Validate build configuration
         uses: docker/build-push-action@v6
         with:
@@ -48,3 +59,13 @@ jobs:
         with:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ env.REPO_NAME }}:${{ github.sha }}
+
+  can-i-deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: can-i-deploy
+        run: npx pact-broker can-i-deploy --pacticipant ${{env.PACTICIPANT}} \
+          --broker-base-url ${{env.PACT_BROKER_BASE_URL}} -k ${{env.PACT_BROKER_BASE_URL}} --version 1.0.0 \
+          --retry-while-unknown 30 \
+          --retry-interval 10
