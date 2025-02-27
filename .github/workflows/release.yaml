@@ -4,7 +4,6 @@ env:
   NODE_VERSION: 22
   REPO_NAME: pact-react-ui-service
   PACT_BROKER_BASE_URL: https://vietnam-national-university.pactflow.io
-  PACT_BROKER_TOKEN: FhetDP4tQXfYaQPLl6QrBw
   PACTICIPANT: NodeBackend
 
 on:
@@ -46,7 +45,7 @@ jobs:
 
       - name: Publish contract
         run: npx pact-broker publish pact/pacts --consumer-app-version "3.0.6" 
-          --branch "main" --broker-base-url ${{env.PACT_BROKER_BASE_URL}} --broker-token ${{env.PACT_BROKER_BASE_URL}}
+          --branch "main" --broker-base-url ${{env.PACT_BROKER_BASE_URL}} --broker-token ${{secrets.PACT_BROKER_TOKEN}}
 
   can-i-deploy:
     needs: test-and-publish-contract
