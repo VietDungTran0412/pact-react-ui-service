@@ -52,9 +52,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: can-i-deploy
-        run: npx pact-broker can-i-deploy --pacticipant ${{env.PACTICIPANT}} \
-          --broker-base-url ${{env.PACT_BROKER_BASE_URL}} -k ${{env.PACT_BROKER_BASE_URL}} --version 1.0.0 \
-          --retry-while-unknown 30 \
+        run: npx pact-broker can-i-deploy --pacticipant ${{env.PACTICIPANT}}
+          --broker-base-url ${{env.PACT_BROKER_BASE_URL}} -k ${{env.PACT_BROKER_BASE_URL}} --version 1.0.0 
+          --retry-while-unknown 30 
           --retry-interval 10
 
   release:
